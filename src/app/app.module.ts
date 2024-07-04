@@ -24,6 +24,7 @@ import { DirectorDialogComponent } from './director-dialog/director-dialog.compo
 import { MovieDetailsDialogComponent } from './movie-details-dialog/movie-details-dialog.component';
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { UserProfileDialogComponent } from './user-profile-dialog/user-profile-dialog.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     MovieDetailsDialogComponent,
     FavoriteButtonComponent,
     UserProfileDialogComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<!-- src/app/edit-profile/edit-profile.component.html -->
+<div class="edit-profile-container">
+  <h2>Edit Profile</h2>
+  <form (ngSubmit)="onSubmit()" #editProfileForm="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="user.Username" name="username" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="user.Email" name="email" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Birthdate</mat-label>
+      <input matInput [(ngModel)]="user.BirthDate" name="birthDate" type="date" >
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save Changes</button>
+  </form>
+</div>

@@ -14,6 +14,8 @@ import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-detai
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  user: any = {};
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
@@ -65,3 +67,4 @@ openMovieDetailsDialog(title: string): void {
   });
 }
 }
+

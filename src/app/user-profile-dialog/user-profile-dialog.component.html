@@ -1,8 +1,18 @@
-<!-- user-profile-dialog.component.html -->
-<h2>User Profile Details</h2>
-<p>{{ user.username }}</p>
-<p>{{ user.email }}</p>
+<h1>User Profile Details</h1>
+<h2>Username: {{ user.Username }}</h2>
 <h3>Favorite Movies</h3>
-<ul>
-  <li *ngFor="let movie of favoriteMovies">{{ movie.Title }}</li>
-</ul>
+
+<div *ngIf="favoriteMovies && favoriteMovies.length > 0; else noFavorites">
+  <mat-card *ngFor="let movie of favoriteMovies">
+    <mat-card-title>{{ movie.Title }}</mat-card-title>
+    <mat-card-subtitle>{{ movie.Genre?.Name }}</mat-card-subtitle>
+    <mat-card-content>
+      <p>{{ movie.Description }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #noFavorites>
+  <p>No favorite movies added yet.</p>
+</ng-template>
+     

@@ -124,18 +124,19 @@ getGenre(genreName: string): Observable<any> {
     );
   }
 
-  // Making the api call for the Edit User endpoint
   editUser(username: string, userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.put(apiUrl + 'users/' + username, userDetails, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json'
       })
     }).pipe(
-      map((res: any) => this.extractResponseData(res)),
+      map((res: any) => res),
       catchError(this.handleError)
     );
   }
+  
 
   // Making the api call for the Delete User endpoint
   deleteUser(username: string): Observable<any> {

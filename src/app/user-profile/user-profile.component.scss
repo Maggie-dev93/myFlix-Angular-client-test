@@ -1,0 +1,16 @@
+.user-profile-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+  }
+  
+  .user-profile {
+    text-align: center; /* Center content inside user-profile div */
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust width as needed */
+  }
+  

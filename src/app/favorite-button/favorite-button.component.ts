@@ -8,10 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./favorite-button.component.scss']
 })
 export class FavoriteButtonComponent {
-  @Input()
-  movieId!: string; // Input property to receive movie ID
-  @Input()
-  isFavorite!: boolean; // Input property to determine if the movie is already a favorite
+  @Input() movieId!: string; // Input property to receive movie ID
+  @Input() isFavorite!: boolean; // Input property to determine if the movie is already a favorite
 
   constructor(
     private fetchApiData: FetchApiDataService,
@@ -38,7 +36,7 @@ export class FavoriteButtonComponent {
         this.snackBar.open('Added to favorites', 'OK', {
           duration: 2000,
         });
-        // Update local state or trigger event to update parent component
+        this.isFavorite = true; // Update the local state
       },
       (error: any) => {
         console.error('Error adding to favorites:', error);
@@ -56,12 +54,12 @@ export class FavoriteButtonComponent {
       return;
     }
 
-    /*this.fetchApiData.removeFavoriteMovies(username, this.movieId).subscribe(
+    this.fetchApiData.deleteFavoriteMovies(username, this.movieId).subscribe(
       (response: any) => {
         this.snackBar.open('Removed from favorites', 'OK', {
           duration: 2000,
         });
-        // Update local state or trigger event to update parent component
+        this.isFavorite = false; // Update the local state
       },
       (error: any) => {
         console.error('Error removing from favorites:', error);
@@ -69,6 +67,6 @@ export class FavoriteButtonComponent {
           duration: 2000,
         });
       }
-    );*/
+    );
   }
 }

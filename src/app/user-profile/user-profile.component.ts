@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
   user: any = {};
   favoriteMovies: any[] = [];
+  originalUser: any = {};
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -25,23 +26,23 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser(): void {
-    const username = localStorage.getItem('user');
-    if (username) {
-      this.fetchApiData.getUser(username).subscribe((resp: any) => {
-        this.user = resp;
-        this.favoriteMovies = this.user.FavoriteMovies;
-        this.router.navigate(['users']);
-        console.log(this.user);
-      });
+    const curUser = localStorage.getItem('currentUser');
+    if (curUser) {
+      this.user = JSON.parse(curUser);
+      this.originalUser = { ...this.user }; // Save a copy of the original user data
+      this.favoriteMovies = this.favoriteMovies;
     } else {
       console.error('Username not found in localStorage');
     }
   }
 
-  openUserDetailsDialog(): void {
-    this.dialog.open(UserProfileDialogComponent, {
-      width: '500px',
-      data: { user: this.user }
-    });
-  }
-}
+    openUserDetailsDialog(): void {
+      const dialogRef = this.dialog.open(UserProfileDialogComponent, {
+        width: '500px',
+        data: { 
+          user: this.user, 
+          favoriteMovies: this.favoriteMovies 
+        }
+      });
+    }
+  }    
