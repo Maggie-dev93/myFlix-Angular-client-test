@@ -46,25 +46,29 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-     // Assuming the username can be changed
-     const username = this.user.Username;
-     this.fetchApiData.editUser(username, this.user).subscribe(
-       (res: any) => {
-         localStorage.setItem('currentUser', JSON.stringify(res)); // Update local storage with updated user data
-         this.snackBar.open('Profile updated successfully', 'OK', {
-           duration: 2000,
-         });
-         this.router.navigate(['/profile']); // Redirect to profile page after successful update
-       },
-       (error: any) => {
-         console.error('Error updating profile:', error);
-         this.snackBar.open('Failed to update profile', 'OK', {
-           duration: 2000,
-         });
-       }
-     );
-   }
- 
+    const username = this.user.Username;
+    this.fetchApiData.editUser(username, this.user).subscribe(
+      (res: any) => {
+        localStorage.setItem('currentUser', JSON.stringify(res)); // Update local storage with updated user data
+        this.snackBar.open('Profile updated successfully', 'OK', {
+          duration: 2000,
+        });
+        this.router.navigate(['/profile']); // Redirect to profile page after successful update
+      },
+      (error: any) => {
+        console.error('Error updating profile:', error);
+        if (error.status === 404) {
+          this.snackBar.open('User not found. Please try again later.', 'OK', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open('Failed to update profile. Please try again later.', 'OK', {
+            duration: 2000,
+          });
+        }
+      }
+    );
+  }
 
   // Function to check if any changes were made in the profile form
   noChangesMade(): boolean {
@@ -76,4 +80,3 @@ export class EditProfileComponent implements OnInit {
     );
   }
 }
-

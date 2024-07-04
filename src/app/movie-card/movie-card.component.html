@@ -3,8 +3,7 @@
     <button mat-button color="primary" routerLink="/profile" class="profile-button">View Profile</button>
   </div>
   
-</div>
-  <div style="display: flex;" >
+  <div style="display: flex;">
     <mat-card *ngFor="let movie of movies;" style="flex: 1 1 30%; margin: 10px;">
         <mat-card-header>
         <mat-card-title>{{movie.Title}}</mat-card-title>
@@ -20,7 +19,9 @@
           <button mat-button color="primary" (click)="openGenreDialog(movie.Genre.Name)">
             Genre
           </button>
-      <mat-icon>favorite_border</mat-icon>
+        <div *ngIf="movie.isFavorite; else elseBlock"><button mat-button [ngStyle]="{'color':'red'}" (click)="toggleFavoriteById(movie._id, movie.isFavorite)"><mat-icon>favorite</mat-icon></button></div>
+          <ng-template #elseBlock><button mat-button [ngStyle]="{'color':'grey'}" (click)="toggleFavoriteById(movie._id, movie.isFavorite)"><mat-icon>favorite_border</mat-icon></button></ng-template>
+      
         </mat-card-actions>
     </mat-card>
 </div>

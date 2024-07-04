@@ -1,41 +1,42 @@
 .movie-cards-container {
-    max-height: 400px; /* Set a maximum height for the container */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; 
+    overflow-y: auto; 
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center align items horizontally */
-    align-items: flex-start; /* Align items to the top */
+    justify-content: center; 
+    align-items: flex-start; 
   }
   
   
   .movie-card.small {
-    width: 200px; /* Adjust width as per your design */
-    margin: 10px; /* Adjust margin as needed */
+    width: 200px; 
+    margin: 10px; 
+    background-color: whitesmoke;
   }
   
   .movie-card.small .mat-card-title {
-    font-size: 14px; /* Adjust font size of title */
+    font-size: 14px; 
   }
   
   .movie-card.small .mat-card-subtitle {
-    font-size: 12px; /* Adjust font size of subtitle */
+    font-size: 12px; 
   }
   
   .movie-card.small .movie-image {
-    width: 100%; /* Ensure image fits within card */
+    width: 100%;
     height: auto;
   }
   
   .movie-card.small .mat-card-content {
-    padding: 8px; /* Adjust padding of content */
+    padding: 8px; 
   }
   
   .movie-card.small .mat-card-actions {
-    justify-content: space-between; /* Adjust alignment of actions */
+    justify-content: space-between; 
   }
   
   .dialog-header {
     text-align: center;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 20px; 
   }
   

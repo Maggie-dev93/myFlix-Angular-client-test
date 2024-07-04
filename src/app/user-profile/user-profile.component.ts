@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
     const curUser = localStorage.getItem('currentUser');
     if (curUser) {
       this.user = JSON.parse(curUser);
-      this.originalUser = { ...this.user }; // Save a copy of the original user data
+      this.originalUser = { ...this.user }; 
       this.favoriteMovies = this.favoriteMovies;
     } else {
       console.error('Username not found in localStorage');

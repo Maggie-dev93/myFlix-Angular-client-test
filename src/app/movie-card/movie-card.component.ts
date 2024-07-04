@@ -7,6 +7,7 @@ import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-details-dialog.component';
 import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie-card',
@@ -20,7 +21,9 @@ export class MovieCardComponent {
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    public favoriteButtonComponent: FavoriteButtonComponent
 ) { }
 ngOnInit(): void {
   this.getMovies();
@@ -30,9 +33,15 @@ getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe(res => {
       this.movies = res;
 
-      let user = JSON.parse(localStorage.getItem("user") || "");
+      let user = JSON.parse(localStorage.getItem("currentUser") || "");
       this.movies.forEach((movie: any) => {
-          movie.isFavorite = user.favoriteMovies.includes(movie._id);
+        if(user.FavoriteMovies.includes(movie._id)) {
+          movie.isFavorite = true;
+        }
+        else {
+          movie.isFavorite = false
+        }
+
       })
       return this.movies;
   }, err => {
@@ -50,7 +59,7 @@ openGenreDialog(genreName: string): void {
 openDirectorDialog(directorName: string): void {
   const dialogRef = this.dialog.open(DirectorDialogComponent, {
     width: '500px',
-    data: { directorName: directorName } // Pass the directorName correctly here
+    data: { directorName: directorName } 
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -60,11 +69,15 @@ openDirectorDialog(directorName: string): void {
 openMovieDetailsDialog(title: string): void {
   const dialogRef = this.dialog.open(MovieDetailsDialogComponent, {
     width: '500px',
-    data: { title: title } // Pass the title correctly here
+    data: { title: title } 
   });
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
   });
+}
+toggleFavoriteById(movieId: string, isFavorite: boolean): void {
+  const favoriteButtonComponent = new FavoriteButtonComponent(this.fetchApiData, this.snackBar);
+  favoriteButtonComponent.toggleFavorite(movieId, isFavorite);
 }
 }
