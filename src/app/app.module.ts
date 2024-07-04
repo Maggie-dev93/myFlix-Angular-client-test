@@ -25,6 +25,7 @@ import { MovieDetailsDialogComponent } from './movie-details-dialog/movie-detail
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { UserProfileDialogComponent } from './user-profile-dialog/user-profile-dialog.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [FetchApiDataService],
   bootstrap: [AppComponent]

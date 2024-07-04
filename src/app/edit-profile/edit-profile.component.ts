@@ -1,4 +1,3 @@
-// src/app/edit-profile/edit-profile.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -23,9 +22,10 @@ export class EditProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
+    this.getUser(); // Fetch user data on component initialization
   }
 
+  // Function to fetch user data from local storage
   getUser(): void {
     const curUser = localStorage.getItem('currentUser');
     if (curUser) {
@@ -37,6 +37,7 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
+  // Function to submit the updated profile
   onSubmit(): void {
     if (this.noChangesMade()) {
       this.snackBar.open('You must fill out at least one field to update your profile', 'OK', {
@@ -45,25 +46,34 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    const username = this.user.Username; // Assuming the username is not being changed
-    this.fetchApiData.editUser(username, this.user).subscribe((res: any) => {
-      localStorage.setItem('currentUser', JSON.stringify(res));
-      this.snackBar.open('Profile updated successfully', 'OK', {
-        duration: 2000,
-      });
-      this.router.navigate(['/profile']);
-    }, (error: any) => {
-      console.error('Error updating profile:', error);
-      this.snackBar.open('Failed to update profile', 'OK', {
-        duration: 2000,
-      });
-    });
-  }
+     // Assuming the username can be changed
+     const username = this.user.Username;
+     this.fetchApiData.editUser(username, this.user).subscribe(
+       (res: any) => {
+         localStorage.setItem('currentUser', JSON.stringify(res)); // Update local storage with updated user data
+         this.snackBar.open('Profile updated successfully', 'OK', {
+           duration: 2000,
+         });
+         this.router.navigate(['/profile']); // Redirect to profile page after successful update
+       },
+       (error: any) => {
+         console.error('Error updating profile:', error);
+         this.snackBar.open('Failed to update profile', 'OK', {
+           duration: 2000,
+         });
+       }
+     );
+   }
+ 
 
+  // Function to check if any changes were made in the profile form
   noChangesMade(): boolean {
-    return this.user.Username === this.originalUser.Username &&
-           this.user.Email === this.originalUser.Email &&
-           this.user.BirthDate === this.originalUser.BirthDate;
+    return (
+      this.user.Username === this.originalUser.Username &&
+      this.user.Email === this.originalUser.Email &&
+      this.user.BirthDate === this.originalUser.BirthDate &&
+      (!this.user.Password || this.user.Password === '') // Check if password is empty or unchanged
+    );
   }
 }
 

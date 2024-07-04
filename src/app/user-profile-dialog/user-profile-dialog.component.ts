@@ -20,12 +20,13 @@ export class UserProfileDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchFavoriteMovies(this.user.Username); // Fetch favorite movies using user's username
+    this.getFavoriteMovies(this.user.Username); // Fetch favorite movies using user's username
   }
 
-  fetchFavoriteMovies(username: string): void {
+  getFavoriteMovies(username: string): void {
     this.fetchApiData.getFavoriteMovies(username).subscribe(
       (res: any) => {
+        console.log(res)
         this.favoriteMovies = res;
       },
       (err: any) => {

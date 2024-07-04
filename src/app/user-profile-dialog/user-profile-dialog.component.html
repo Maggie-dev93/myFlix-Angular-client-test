@@ -1,18 +1,22 @@
-<h1>User Profile Details</h1>
-<h2>Username: {{ user.Username }}</h2>
-<h3>Favorite Movies</h3>
 
 <div *ngIf="favoriteMovies && favoriteMovies.length > 0; else noFavorites">
-  <mat-card *ngFor="let movie of favoriteMovies">
-    <mat-card-title>{{ movie.Title }}</mat-card-title>
-    <mat-card-subtitle>{{ movie.Genre?.Name }}</mat-card-subtitle>
-    <mat-card-content>
-      <p>{{ movie.Description }}</p>
-    </mat-card-content>
-  </mat-card>
+  <div class="dialog-header">
+    <h2>{{ user.Username }}'s Favorite Movies</h2>
+  </div>
+  <div class="movie-cards-container">
+    <mat-card *ngFor="let movie of favoriteMovies" class="movie-card small">
+      <mat-card-header>
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <mat-card-subtitle>Directed by: {{ movie.Director.Name }}</mat-card-subtitle>
+      </mat-card-header>
+      <img class="movie-image" src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
+      <mat-card-content>
+        <p>{{ movie.Description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
 <ng-template #noFavorites>
-  <p>No favorite movies added yet.</p>
+  <p>No favorite movies found.</p>
 </ng-template>
-     

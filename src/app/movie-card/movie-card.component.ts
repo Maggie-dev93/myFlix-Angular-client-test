@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-details-dialog.component';
+import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -67,4 +68,3 @@ openMovieDetailsDialog(title: string): void {
   });
 }
 }
-
