@@ -14,12 +14,37 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { FetchApiDataService } from './fetch-api-data.service';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
+import { DirectorDialogComponent } from './director-dialog/director-dialog.component';
+import { MovieDetailsDialogComponent } from './movie-details-dialog/movie-details-dialog.component';
+import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
+import { UserProfileDialogComponent } from './user-profile-dialog/user-profile-dialog.component';
+
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
-    UserLoginFormComponent
+    UserLoginFormComponent,
+    MovieCardComponent,
+    WelcomePageComponent,
+    UserProfileComponent,
+    GenreDialogComponent,
+    DirectorDialogComponent,
+    MovieDetailsDialogComponent,
+    FavoriteButtonComponent,
+    UserProfileDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +58,8 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatFormFieldModule,
     MatSnackBarModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
+    MatIconModule
   ],
   providers: [FetchApiDataService],
   bootstrap: [AppComponent]

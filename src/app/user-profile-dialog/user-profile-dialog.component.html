@@ -1,0 +1,8 @@
+<!-- user-profile-dialog.component.html -->
+<h2>User Profile Details</h2>
+<p>{{ user.username }}</p>
+<p>{{ user.email }}</p>
+<h3>Favorite Movies</h3>
+<ul>
+  <li *ngFor="let movie of favoriteMovies">{{ movie.Title }}</li>
+</ul>

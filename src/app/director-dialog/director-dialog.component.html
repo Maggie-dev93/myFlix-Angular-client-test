@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>{{ director?.Name }}</h2>
+<div mat-dialog-content>
+  <p><strong>Bio:</strong> {{ director?.Bio }}</p>
+  <p><strong>Birth:</strong> {{ director?.Birth }}</p>
+  <p><strong>Death:</strong> {{ director?.Death }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="'close'">Close</button>
+</div>
