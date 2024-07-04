@@ -1,3 +1,22 @@
-<!-- user-profile.component.html -->
-<button mat-button (click)="openUserProfileDialog()">View Profile</button>
-
+<!-- src/app/user-profile/user-profile.component.html -->
+<div class="user-profile">
+    <h2>{{ user.Username }}'s Profile</h2>
+    <p>Email: {{ user.Email }}</p>
+    <p>Birthday: {{ user.Birthday | date }}</p>
+    <button mat-raised-button color="primary" (click)="openUserDetailsDialog()">View Details</button>
+  
+    <h3>Favorite Movies</h3>
+    <div *ngIf="favoriteMovies.length > 0; else noFavorites">
+      <mat-card *ngFor="let movie of favoriteMovies">
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <mat-card-subtitle>{{ movie.Genre.Name }}</mat-card-subtitle>
+        <mat-card-content>
+          <p>{{ movie.Description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <ng-template #noFavorites>
+      <p>No favorite movies added yet.</p>
+    </ng-template>
+  </div>
+  
