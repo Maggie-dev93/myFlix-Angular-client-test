@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,4 +45,10 @@ export class UserProfileComponent implements OnInit {
         }
       });
     }
-  }    
+  
+
+  logout(): void {
+    localStorage.clear(); // Clear all items from localStorage
+    this.router.navigate(['/welcome']); // Optionally navigate to login or another relevant page
+  }
+}

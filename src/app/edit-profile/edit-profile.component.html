@@ -1,36 +1,25 @@
 <!-- src/app/edit-profile/edit-profile.component.html -->
 <div class="edit-profile-container">
   <h2>Edit Profile</h2>
-  <!-- src/app/edit-profile/edit-profile.component.html -->
-
-<div class="edit-profile-container">
   <form (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <label for="username">Username:</label>
-      <input matInput type="text" id="username" name="username" [(ngModel)]="user.Username" required>
+      <input matInput type="text" placeholder="Username" [(ngModel)]="user.Username" name="username">
     </mat-form-field>
 
     <mat-form-field>
-      <label for="email">Email:</label>
-      <input matInput type="email" id="email" name="email" [(ngModel)]="user.Email" required>
+      <input matInput type="email" placeholder="Email" [(ngModel)]="user.Email" name="email">
     </mat-form-field>
 
     <mat-form-field>
-      <label for="password">Password:</label>
-      <input matInput type="password" id="password" name="password" [(ngModel)]="user.Password">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="user.Password" name="password">
     </mat-form-field>
 
     <mat-form-field>
-      <label for="birthdate">Birth Date:</label>
-      <input matInput type="date" id="birthdate" name="birthdate" [(ngModel)]="user.BirthDate" required>
+      <input matInput type="date" placeholder="Birth Date" [(ngModel)]="user.BirthDate" name="birthdate">
     </mat-form-field>
 
     <button mat-raised-button type="submit">Save Changes</button>
-    <div class="back">
-    <button mat-button color="primary" routerLink="/profile" >Cancel</button>
-    <button mat-button color="primary" routerLink="/movies" class="profile-button">Back to Movies</button>
-  </div>
+    <button mat-button color="primary" routerLink="/profile">Cancel</button>
+    <button mat-button color="primary" routerLink="/movies">Back to Movies</button>
   </form>
 </div>
-
-  

@@ -8,6 +8,7 @@
       <p>Birthday: {{ user.BirthDate | date }}</p>
       <button mat-raised-button color="primary" (click)="openUserDetailsDialog()">View Details</button>
       <button mat-raised-button color="accent" routerLink="/edit-profile">Edit Profile</button>
+      <button mat-button color="primary" (click)="logout()">Logout</button>
     </div>
   </div>
   

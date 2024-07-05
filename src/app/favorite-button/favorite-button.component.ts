@@ -23,6 +23,7 @@ export class FavoriteButtonComponent {
   toggleFavorite(movieId: string, isFavorite: boolean): void {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const username = user.Username;
+    const icon = document.getElementById(`${movieId}-favorite-icon`);
 
     if (isFavorite) {
       this.fetchApiData.deleteFavoriteMovies(username, movieId).subscribe((res) => {
@@ -31,7 +32,10 @@ export class FavoriteButtonComponent {
           duration: 2000,
         });
         this.isFavorite = false;
-        this.updateUserFavorites(res);
+        icon?.setAttribute("fontIcon", "favorite_border");
+        // Manually update the local user object to reflect the changes
+        user.FavoriteMovies = user.FavoriteMovies.filter((id: string) => id !== movieId);
+        this.updateUserFavorites(user);
       }, (error) => {
         console.error('Error removing from favorites:', error);
         this.snackBar.open('Failed to remove from favorites', 'OK', {
@@ -40,11 +44,14 @@ export class FavoriteButtonComponent {
       });
     } else {
       this.fetchApiData.addFavoriteMovies(username, movieId).subscribe((res) => {
+        console.log('Add response:', res); // Log the response
         this.snackBar.open('Added to favorites', 'OK', {
           duration: 2000,
         });
         this.isFavorite = true;
-        this.updateUserFavorites(res);
+        icon?.setAttribute("fontIcon", "favorite");
+        user.FavoriteMovies.push(movieId);
+        this.updateUserFavorites(user);
       }, (error) => {
         console.error('Error adding to favorites:', error);
         this.snackBar.open('Failed to add to favorites', 'OK', {

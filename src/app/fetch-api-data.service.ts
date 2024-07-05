@@ -137,31 +137,47 @@ getGenre(genreName: string): Observable<any> {
   
   
 
-  // Making the api call for the Delete User endpoint
-  deleteUser(username: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + username, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-      })
-    }).pipe(
-      map((res: any) => this.extractResponseData(res)),
-      catchError(this.handleError)
-    );
+  // src/app/fetch-api-data.service.ts
+deleteUser(username: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return throwError(() => new Error('Token not found in localStorage.'));
   }
 
+  return this.http.delete(apiUrl + 'users/' + username, {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + token,
+    }),
+    observe: 'response'
+  }).pipe(
+    map((res: any) => {
+      if (res.status === 200) {
+        return res.body;
+      } else {
+        throw new Error(`Unexpected status code ${res.status}`);
+      }
+    }),
+    catchError((error: any) => {
+      console.error('Error in deleteUser:', error);
+      return throwError(() => new Error('Something bad happened; please try again later.'));
+    })
+  );
+}
+
   // Making the api call for the Delete a Movie to Favourite Movies endpoint
-  deleteFavoriteMovies(username: string, movieID: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + username + '/movies/' + movieID, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-      })
-    }).pipe(
-      map((res: any) => this.extractResponseData(res)),
-      catchError(this.handleError)
-    );
-  }
+deleteFavoriteMovies(username: string, movieID: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  return this.http.delete(apiUrl + 'users/' + username + '/movies/' + movieID, {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + token,
+    }),
+    responseType: 'text' // Expect a text response from the server
+  }).pipe(
+    map((res: any) => res), // Directly map the response
+    catchError(this.handleError)
+  );
+}
+
 
   // Non-typed response extraction
   private extractResponseData(res: any): any {

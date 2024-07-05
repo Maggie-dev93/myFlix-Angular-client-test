@@ -1,16 +1,21 @@
-
 <div *ngIf="favoriteMovies && favoriteMovies.length > 0; else noFavorites">
   <div class="dialog-header">
     <h2>{{ user.Username }}'s Favorite Movies</h2>
   </div>
   <div class="movie-cards-container">
     <mat-card *ngFor="let movie of favoriteMovies" class="movie-card small">
+      <button mat-icon-button (click)="removeFavoriteMovie(movie._id)" class="text-button">
+        <mat-icon class="remove-button">remove_circle_outline</mat-icon>
+         </button>
       <mat-card-header>
-        <mat-card-title>{{ movie.Title }}</mat-card-title>
-        <mat-card-subtitle>Directed by: {{ movie.Director.Name }}</mat-card-subtitle>
+        <mat-card-title class="mat-card-title">{{ movie.Title }}</mat-card-title>
+        <!-- Move the remove button here, within the loop of favorite movies -->
+        <div class="movie">
+        </div>
+        <mat-card-subtitle class="mat-card-subtitle">Directed by: {{ movie.Director.Name }}</mat-card-subtitle>
       </mat-card-header>
       <img class="movie-image" src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
-      <mat-card-content>
+      <mat-card-content class="mat-card-content">
         <p>{{ movie.Description }}</p>
       </mat-card-content>
     </mat-card>

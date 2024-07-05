@@ -1,9 +1,9 @@
 <div>
-  <div>
+  <div class="fixed-profile-button-container">
     <button mat-button color="primary" routerLink="/profile" class="profile-button">View Profile</button>
   </div>
   
-  <div style="display: flex;">
+  <div style="display: flex;" class="movie-card">
     <mat-card *ngFor="let movie of movies;" style="flex: 1 1 30%; margin: 10px;">
         <mat-card-header>
         <mat-card-title>{{movie.Title}}</mat-card-title>

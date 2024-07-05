@@ -46,8 +46,8 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    const username = this.user.Username;
-    this.fetchApiData.editUser(username, this.user).subscribe(
+    const originalUsername = this.originalUser.Username;
+    this.fetchApiData.editUser(originalUsername, this.user).subscribe(
       (res: any) => {
         localStorage.setItem('currentUser', JSON.stringify(res)); // Update local storage with updated user data
         this.snackBar.open('Profile updated successfully', 'OK', {
