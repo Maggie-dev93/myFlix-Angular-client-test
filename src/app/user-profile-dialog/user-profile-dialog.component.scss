@@ -1,0 +1,60 @@
+.movie-cards-container {
+  max-height: 400px; 
+  overflow-y: auto; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  align-items: flex-start; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+
+.movie-card.small {
+  width: 200px; 
+  margin: 10px; 
+  background-color: whitesmoke;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+  display: flex; /* Center contents vertically */
+  flex-direction: column; /* Arrange contents vertically */
+  justify-content: center; /* Center contents horizontally */
+  text-align: center; /* Center text within the card */
+}
+
+.movie-card.small .mat-card-title {
+  font-size: 16px; 
+  text-align: left;
+  margin-top: 0px; /* Adjust top margin to reduce space */
+}
+
+.movie-card.small .mat-card-subtitle {
+  font-size: 10px; 
+  text-align: left;
+  color: #00008b; /* Very dark blue */
+}
+
+.movie-card.small .movie-image {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+
+.movie-card.small .mat-card-content {
+  padding: 8px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+
+.movie-card.small .mat-card-actions {
+  justify-content: space-between; 
+}
+
+.dialog-header {
+  text-align: center;
+  margin-bottom: 20px; 
+}
+
+.remove-button {
+  display: flex;
+  align-items: center;
+  font-size: 12px; /* Smaller font size */
+  color: #f44336; /* Optional: red color for the remove button */
+  margin-top: 0px; /* Adjust top margin to reduce space */
+}

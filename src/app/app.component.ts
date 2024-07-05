@@ -1,3 +1,5 @@
+// src/app/app.component.ts
+// src/app/app.component.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myFlix-Angular-client';
-}
+
+  }
