@@ -1,8 +1,15 @@
+<!-- 
+  Template for displaying genre details in a dialog.
+
+  @component
+  @selector app-genre-dialog
+-->
 <h2 mat-dialog-title>{{ genre.Name }}</h2>
 <mat-dialog-content>
+  <!-- Display the description of the genre -->
   <p>{{ genre.Description }}</p>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <!-- Button to close the dialog -->
   <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>
-

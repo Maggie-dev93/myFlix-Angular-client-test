@@ -3,6 +3,13 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 
+/**
+ * Component for the favorite button functionality.
+ * Allows users to add or remove movies from their favorites.
+ *
+ * @component
+ * @selector app-favorite-button
+ */
 @Component({
   selector: 'app-favorite-button',
   templateUrl: './favorite-button.component.html',
@@ -12,14 +19,27 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FavoriteButtonComponent {
-  @Input() movieId!: string; // Input property to receive movie ID
-  @Input() isFavorite!: boolean; // Input property to determine if the movie is already a favorite
+  /**
+   * Input property to receive movie ID.
+   */
+  @Input() movieId!: string;
+
+  /**
+   * Input property to determine if the movie is already a favorite.
+   */
+  @Input() isFavorite!: boolean;
 
   constructor(
     private fetchApiData: FetchApiDataService,
     private snackBar: MatSnackBar
   ) {}
 
+  /**
+   * Toggles the favorite status of a movie.
+   *
+   * @param movieId - The ID of the movie to toggle favorite status for.
+   * @param isFavorite - The current favorite status of the movie.
+   */
   toggleFavorite(movieId: string, isFavorite: boolean): void {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const username = user.Username;
@@ -61,6 +81,11 @@ export class FavoriteButtonComponent {
     }
   }
 
+  /**
+   * Updates the user object in local storage with the new favorite movies.
+   *
+   * @param user - The updated user object.
+   */
   private updateUserFavorites(user: any): void {
     console.log('Updated user:', user); // Log the updated user object
     localStorage.setItem('currentUser', JSON.stringify(user));

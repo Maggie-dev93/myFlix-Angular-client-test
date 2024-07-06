@@ -1,4 +1,5 @@
 // src/app/movie-card/movie-card.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { Router } from '@angular/router';
@@ -14,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   user: any = {};
 
@@ -24,60 +25,83 @@ export class MovieCardComponent {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     public favoriteButtonComponent: FavoriteButtonComponent
-) { }
-ngOnInit(): void {
-  this.getMovies();
-}
+  ) { }
 
-getMovies(): void {
-  this.fetchApiData.getAllMovies().subscribe(res => {
+  /**
+   * Initializes component by fetching all movies.
+   */
+  ngOnInit(): void {
+    this.getMovies();
+  }
+
+  /**
+   * Fetches all movies from the API and sets up favorite status for each movie based on user data.
+   */
+  getMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe(res => {
       this.movies = res;
 
       let user = JSON.parse(localStorage.getItem("currentUser") || "");
       this.movies.forEach((movie: any) => {
-        if(user.FavoriteMovies.includes(movie._id)) {
+        if (user.FavoriteMovies.includes(movie._id)) {
           movie.isFavorite = true;
+        } else {
+          movie.isFavorite = false;
         }
-        else {
-          movie.isFavorite = false
-        }
+      });
+    }, err => {
+      console.error(err);
+    });
+  }
 
-      })
-      return this.movies;
-  }, err => {
-      console.error(err)
-  })
-}
+  /**
+   * Opens a dialog to display details of a specific genre.
+   * @param genreName - The name of the genre to display details for.
+   */
+  openGenreDialog(genreName: string): void {
+    this.dialog.open(GenreDialogComponent, {
+      width: '280px',
+      data: { genreName }
+    });
+  }
 
-openGenreDialog(genreName: string): void {
-  this.dialog.open(GenreDialogComponent, {
-    width: '280px',
-    data: { genreName }
-  });
-}
+  /**
+   * Opens a dialog to display details of a specific director.
+   * @param directorName - The name of the director to display details for.
+   */
+  openDirectorDialog(directorName: string): void {
+    const dialogRef = this.dialog.open(DirectorDialogComponent, {
+      width: '500px',
+      data: { directorName }
+    });
 
-openDirectorDialog(directorName: string): void {
-  const dialogRef = this.dialog.open(DirectorDialogComponent, {
-    width: '500px',
-    data: { directorName: directorName } 
-  });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-  });
-}
-openMovieDetailsDialog(title: string): void {
-  const dialogRef = this.dialog.open(MovieDetailsDialogComponent, {
-    width: '500px',
-    data: { title: title } 
-  });
+  /**
+   * Opens a dialog to display details of a specific movie.
+   * @param title - The title of the movie to display details for.
+   */
+  openMovieDetailsDialog(title: string): void {
+    const dialogRef = this.dialog.open(MovieDetailsDialogComponent, {
+      width: '500px',
+      data: { title }
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-  });
-}
-toggleFavoriteById(movieId: string, isFavorite: boolean): void {
-  const favoriteButtonComponent = new FavoriteButtonComponent(this.fetchApiData, this.snackBar);
-  favoriteButtonComponent.toggleFavorite(movieId, isFavorite);
-}
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  /**
+   * Toggles the favorite status of a movie by calling the toggleFavorite method of FavoriteButtonComponent.
+   * @param movieId - The ID of the movie to toggle favorite status for.
+   * @param isFavorite - The current favorite status of the movie.
+   */
+  toggleFavoriteById(movieId: string, isFavorite: boolean): void {
+    const favoriteButtonComponent = new FavoriteButtonComponent(this.fetchApiData, this.snackBar);
+    favoriteButtonComponent.toggleFavorite(movieId, isFavorite);
+  }
 }

@@ -1,9 +1,17 @@
+<!-- src/app/director-dialog/director-dialog.component.html -->
+
+<!-- Dialog title displaying the director's name. -->
 <h2 mat-dialog-title>{{ director?.Name }}</h2>
+
+<!-- Dialog content displaying director details. -->
 <div mat-dialog-content>
   <p><strong>Bio:</strong> {{ director?.Bio }}</p>
   <p><strong>Birth:</strong> {{ director?.Birth }}</p>
   <p><strong>Death:</strong> {{ director?.Death }}</p>
 </div>
+
+<!-- Dialog actions with a button to close the dialog. -->
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="'close'">Close</button>
 </div>
+
