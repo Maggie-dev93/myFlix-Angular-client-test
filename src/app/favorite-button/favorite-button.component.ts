@@ -45,6 +45,8 @@ export class FavoriteButtonComponent {
     const username = user.Username;
     const icon = document.getElementById(`${movieId}-favorite-icon`);
 
+    console.log('Before toggle favorite, user:', user);
+
     if (isFavorite) {
       this.fetchApiData.deleteFavoriteMovies(username, movieId).subscribe((res) => {
         console.log('Delete response:', res); // Log the response
@@ -53,8 +55,10 @@ export class FavoriteButtonComponent {
         });
         this.isFavorite = false;
         icon?.setAttribute("fontIcon", "favorite_border");
+
         // Manually update the local user object to reflect the changes
         user.FavoriteMovies = user.FavoriteMovies.filter((id: string) => id !== movieId);
+        console.log('User after removing favorite movie:', user);
         this.updateUserFavorites(user);
       }, (error) => {
         console.error('Error removing from favorites:', error);
@@ -70,7 +74,9 @@ export class FavoriteButtonComponent {
         });
         this.isFavorite = true;
         icon?.setAttribute("fontIcon", "favorite");
+
         user.FavoriteMovies.push(movieId);
+        console.log('User after adding favorite movie:', user);
         this.updateUserFavorites(user);
       }, (error) => {
         console.error('Error adding to favorites:', error);
@@ -87,7 +93,8 @@ export class FavoriteButtonComponent {
    * @param user - The updated user object.
    */
   private updateUserFavorites(user: any): void {
-    console.log('Updated user:', user); // Log the updated user object
+    console.log('Before updating localStorage, user:', user);
     localStorage.setItem('currentUser', JSON.stringify(user));
+    console.log('After updating localStorage, currentUser:', localStorage.getItem('currentUser'));
   }
 }

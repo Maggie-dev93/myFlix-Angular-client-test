@@ -2,26 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
 
-## Development server
+## Objective
+Develop the client-side of the myFlix application using Angular, leveraging its existing server-side code (REST API and database), and provide comprehensive supporting documentation.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Key Features
+- The app should display a welcome view where users can either log in or register an account.
+- Once authenticated, the user can view all movies.
+- Upon clicking on a particular movie, users will be taken to a single movie view where additional movie details will be displayed. The single movie view will contain the following features:
+  - A button that takes a user to the director view, displaying details about the director of that particular movie.
+  - A button that takes a user to the genre view, displaying details about that particular genre of the movie.
 
-## Code scaffolding
+### Technical Requirements
+- The application must be written in Angular (version 9 or later).
+- The application requires the latest version of Node.js and npm package.
+- The application must contain user registration and login forms.
+- The application must be designed using Angular Material.
+- The application's codebase must contain comments using Typedoc.
+- The project must contain technical documentation using JSDoc.
+- The project must be hosted on GitHub Pages.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

@@ -49,8 +49,18 @@ export class EditProfileComponent implements OnInit {
     // Ensure the original username is included in the payload
     this.user.Username = this.originalUser.Username;
 
+    // Check if password has changed
+    if (this.user.Password && this.user.Password !== this.originalUser.Password) {
+      console.log('Password has changed, flagging for hashing');
+      this.user.PasswordChanged = true; // Add a flag to indicate the password has changed
+    } else {
+      console.log('Password has not changed');
+      this.user.PasswordChanged = false;
+      delete this.user.Password; // Remove the password field if it hasn't changed
+    }
+
     const originalUsername = this.originalUser.Username;
-    
+
     // Log the payload before making the request
     console.log('Payload:', this.user);
 
