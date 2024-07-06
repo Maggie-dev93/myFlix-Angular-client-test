@@ -1,9 +1,26 @@
+<!--
+  <mat-card> represents the card container for the login form.
+-->
 <mat-card>
+  <!-- 
+    <mat-card-header> displays the header of the card with a title.
+  -->
   <mat-card-header>
+    <!-- 
+      <mat-card-title> sets the title of the card to "Login".
+    -->
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
+
+  <!-- 
+    <mat-card-content> contains the form fields for user login.
+  -->
   <mat-card-content>
     <form>
+      <!-- 
+        <mat-form-field> is a wrapper for form field elements.
+        <input> for username input, binds to userData.Username.
+      -->
       <mat-form-field>
         <input
           matInput
@@ -14,6 +31,11 @@
           required
         >
       </mat-form-field>
+
+      <!-- 
+        <mat-form-field> is a wrapper for form field elements.
+        <input> for password input, binds to userData.Password.
+      -->
       <mat-form-field>
         <input
           matInput
@@ -26,6 +48,11 @@
       </mat-form-field>
     </form>
   </mat-card-content>
+
+  <!-- 
+    <mat-card-actions> contains the action buttons for the card.
+    <button> triggers the loginUser() method on click.
+  -->
   <mat-card-actions>
     <button
       mat-raised-button

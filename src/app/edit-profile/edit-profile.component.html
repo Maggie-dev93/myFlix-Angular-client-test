@@ -3,10 +3,6 @@
   <h2>Edit Profile</h2>
   <form (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <input matInput type="text" placeholder="Username" [(ngModel)]="user.Username" name="username">
-    </mat-form-field>
-
-    <mat-form-field>
       <input matInput type="email" placeholder="Email" [(ngModel)]="user.Email" name="email">
     </mat-form-field>
 
@@ -23,3 +19,4 @@
     <button mat-button color="primary" routerLink="/movies">Back to Movies</button>
   </form>
 </div>
+

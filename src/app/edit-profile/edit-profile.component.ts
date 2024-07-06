@@ -46,7 +46,24 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
+    // Ensure the original username is included in the payload
+    this.user.Username = this.originalUser.Username;
+
+    // Check if password has changed
+    if (this.user.Password && this.user.Password !== this.originalUser.Password) {
+      console.log('Password has changed, flagging for hashing');
+      this.user.PasswordChanged = true; // Add a flag to indicate the password has changed
+    } else {
+      console.log('Password has not changed');
+      this.user.PasswordChanged = false;
+      delete this.user.Password; // Remove the password field if it hasn't changed
+    }
+
     const originalUsername = this.originalUser.Username;
+
+    // Log the payload before making the request
+    console.log('Payload:', this.user);
+
     this.fetchApiData.editUser(originalUsername, this.user).subscribe(
       (res: any) => {
         localStorage.setItem('currentUser', JSON.stringify(res)); // Update local storage with updated user data
@@ -57,7 +74,11 @@ export class EditProfileComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error updating profile:', error);
-        if (error.status === 404) {
+        if (error.status === 400) {
+          this.snackBar.open('Invalid request. Please check the input fields.', 'OK', {
+            duration: 2000,
+          });
+        } else if (error.status === 404) {
           this.snackBar.open('User not found. Please try again later.', 'OK', {
             duration: 2000,
           });
@@ -73,7 +94,6 @@ export class EditProfileComponent implements OnInit {
   // Function to check if any changes were made in the profile form
   noChangesMade(): boolean {
     return (
-      this.user.Username === this.originalUser.Username &&
       this.user.Email === this.originalUser.Email &&
       this.user.BirthDate === this.originalUser.BirthDate &&
       (!this.user.Password || this.user.Password === '') // Check if password is empty or unchanged
