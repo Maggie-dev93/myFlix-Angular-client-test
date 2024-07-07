@@ -1,22 +1,31 @@
-<!-- src/app/edit-profile/edit-profile.component.html -->
+<!-- Edit profile form -->
 <div class="edit-profile-container">
   <h2>Edit Profile</h2>
+
+  <!-- Profile edit form -->
   <form (ngSubmit)="onSubmit()">
+    <!-- Email input field -->
     <mat-form-field>
       <input matInput type="email" placeholder="Email" [(ngModel)]="user.Email" name="email">
     </mat-form-field>
 
+    <!-- Password input field -->
     <mat-form-field>
       <input matInput type="password" placeholder="Password" [(ngModel)]="user.Password" name="password">
     </mat-form-field>
 
+    <!-- Birth date input field -->
     <mat-form-field>
       <input matInput type="date" placeholder="Birth Date" [(ngModel)]="user.BirthDate" name="birthdate">
     </mat-form-field>
 
+    <!-- Save changes button -->
     <button mat-raised-button type="submit">Save Changes</button>
+    
+    <!-- Cancel button -->
     <button mat-button color="primary" routerLink="/profile">Cancel</button>
+    
+    <!-- Back to movies button -->
     <button mat-button color="primary" routerLink="/movies">Back to Movies</button>
   </form>
 </div>
-

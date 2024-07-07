@@ -1,9 +1,14 @@
+<!-- Dialog title displaying the movie title -->
 <h1 mat-dialog-title>{{ movieDetails?.Title }}</h1>
+
+<!-- Dialog content displaying movie details -->
 <div mat-dialog-content>
   <p>{{ movieDetails?.Description }}</p>
   <p>Release Date: {{ movieDetails?.ReleaseDate }}</p>
   <p>Director: {{ movieDetails?.Director?.Name }}</p>
 </div>
+
+<!-- Dialog actions containing a button to close the dialog -->
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="'close'">Close</button>
 </div>
