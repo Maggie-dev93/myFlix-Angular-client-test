@@ -4,6 +4,12 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 
+/**
+ * Component for editing user profile.
+ * 
+ * @component
+ * @selector app-edit-profile
+ */
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -11,9 +17,22 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class EditProfileComponent implements OnInit {
+  /**
+   * Object to hold user data.
+   */
   user: any = {};
+
+  /**
+   * Object to hold original user data.
+   */
   originalUser: any = {};
 
+  /**
+   * @param fetchApiData - Service to fetch API data.
+   * @param router - Router for navigation.
+   * @param snackBar - Service to show snack bar messages.
+   * @param datePipe - Date pipe to format date.
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     private router: Router,
@@ -21,11 +40,17 @@ export class EditProfileComponent implements OnInit {
     private datePipe: DatePipe
   ) {}
 
+  /**
+   * Lifecycle hook that is called after data-bound properties are initialized.
+   * Fetches user data on component initialization.
+   */
   ngOnInit(): void {
-    this.getUser(); // Fetch user data on component initialization
+    this.getUser();
   }
 
-  // Function to fetch user data from local storage
+  /**
+   * Function to fetch user data from local storage.
+   */
   getUser(): void {
     const curUser = localStorage.getItem('currentUser');
     if (curUser) {
@@ -37,7 +62,9 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  // Function to submit the updated profile
+  /**
+   * Function to submit the updated profile.
+   */
   onSubmit(): void {
     if (this.noChangesMade()) {
       this.snackBar.open('You must fill out at least one field to update your profile', 'OK', {
@@ -45,9 +72,6 @@ export class EditProfileComponent implements OnInit {
       });
       return;
     }
-
-    // Ensure the original username is included in the payload
-    this.user.Username = this.originalUser.Username;
 
     // Check if password has changed
     if (this.user.Password && this.user.Password !== this.originalUser.Password) {
@@ -91,9 +115,14 @@ export class EditProfileComponent implements OnInit {
     );
   }
 
-  // Function to check if any changes were made in the profile form
+  /**
+   * Function to check if any changes were made in the profile form.
+   * 
+   * @returns True if no changes were made, false otherwise.
+   */
   noChangesMade(): boolean {
     return (
+      this.user.Username === this.originalUser.Username &&
       this.user.Email === this.originalUser.Email &&
       this.user.BirthDate === this.originalUser.BirthDate &&
       (!this.user.Password || this.user.Password === '') // Check if password is empty or unchanged
