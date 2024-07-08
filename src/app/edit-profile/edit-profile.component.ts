@@ -73,9 +73,6 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    // Ensure the original username is included in the payload
-    this.user.Username = this.originalUser.Username;
-
     // Check if password has changed
     if (this.user.Password && this.user.Password !== this.originalUser.Password) {
       console.log('Password has changed, flagging for hashing');
@@ -125,6 +122,7 @@ export class EditProfileComponent implements OnInit {
    */
   noChangesMade(): boolean {
     return (
+      this.user.Username === this.originalUser.Username &&
       this.user.Email === this.originalUser.Email &&
       this.user.BirthDate === this.originalUser.BirthDate &&
       (!this.user.Password || this.user.Password === '') // Check if password is empty or unchanged

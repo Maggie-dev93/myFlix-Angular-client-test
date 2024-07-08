@@ -1,9 +1,13 @@
-<!-- Edit profile form -->
 <div class="edit-profile-container">
   <h2>Edit Profile</h2>
 
   <!-- Profile edit form -->
   <form (ngSubmit)="onSubmit()">
+    <!-- Username input field -->
+    <mat-form-field>
+      <input matInput type="text" placeholder="Username" [(ngModel)]="user.Username" name="username">
+    </mat-form-field>
+
     <!-- Email input field -->
     <mat-form-field>
       <input matInput type="email" placeholder="Email" [(ngModel)]="user.Email" name="email">
