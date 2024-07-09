@@ -21,3 +21,6 @@ Develop the client-side of the myFlix application using Angular, leveraging its 
 - The project must contain technical documentation using JSDoc.
 - The project must be hosted on GitHub Pages.
 
+#### AI Use
+- AI was used for help to create the logic to check if the user's password had changed in the edit-profile.component.ts.
+
